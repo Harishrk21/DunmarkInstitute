@@ -214,7 +214,7 @@ const Footer: React.FC = () => {
                   <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0 group-hover/contact:scale-110 transition duration-300">
                     <Mail size={14} className="text-white" />
                   </div>
-                  <a href="mailto:info@dunmark.edu" className="hover:text-white transition text-cyan-100 text-sm">
+                  <a href="mailto:info@dunmarkedu.com" className="hover:text-white transition text-cyan-100 text-sm">
                     info@dunmarkedu.com
                   </a>
                 </li>

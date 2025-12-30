@@ -100,29 +100,84 @@ const AdmissionForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
       setLoading(true);
       
-      // Simulate form submission with a timeout
-      setTimeout(() => {
-        setLoading(false);
-        setSubmitted(true);
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          course: '',
-          education: '',
-          dob: '',
-          gender: '',
-          address: '',
-          message: '',
+      const courseNames: { [key: string]: string } = {
+        'dsit': 'Diploma in Sensory Integration Therapy (DSIT)',
+        'dabt': 'Diploma in Applied Behavior Therapy (DABT)',
+        'slpa': 'Diploma in Speech & Language Pathology Assistant (SLPA)',
+        'mbi': 'Diploma in Mindfulness-Based Interventions (MBI)',
+        'bgnt': 'Diploma in Brain Gym & Neuro-Movement Training'
+      };
+
+      const courseFullName = courseNames[formData.course] || formData.course;
+      
+      const emailBody = `
+NEW ADMISSION APPLICATION
+═══════════════════════════════════════
+
+👤 APPLICANT INFORMATION
+▪ Name: ${formData.name}
+▪ Email: ${formData.email}
+▪ Phone: ${formData.phone}
+▪ Date of Birth: ${formData.dob}
+▪ Gender: ${formData.gender}
+▪ Address: ${formData.address || 'Not provided'}
+
+🎓 PROGRAM DETAILS
+▪ Selected Course: ${courseFullName}
+▪ Education Level: ${formData.education}
+
+💭 MOTIVATION
+${formData.message}
+
+═══════════════════════════════════════
+Application submitted on: ${new Date().toLocaleString()}
+      `.trim();
+
+      const formSubmissionData = new FormData();
+      formSubmissionData.append('message', emailBody);
+      formSubmissionData.append('_subject', `🎓 New Admission Application - ${formData.name}`);
+      formSubmissionData.append('_replyto', formData.email);
+      formSubmissionData.append('_next', window.location.href);
+      formSubmissionData.append('_captcha', 'false');
+      
+      try {
+        const response = await fetch('https://formsubmit.co/aravind@dunmarkedu.com,admin@dunmarkedu.com,contact@dunmarkedu.com,info@dunmarkedu.com,principal@dunmarkedu.com', {
+          method: 'POST',
+          body: formSubmissionData,
+          headers: {
+            'Accept': 'application/json'
+          }
         });
-      }, 2000);
+
+        if (response.ok) {
+          setSubmitted(true);
+          // Reset form
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            course: '',
+            education: '',
+            dob: '',
+            gender: '',
+            address: '',
+            message: '',
+          });
+        } else {
+          setLoading(false);
+          alert('Error submitting application. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        setLoading(false);
+        alert('Error submitting application. Please try again.');
+      }
     }
   };
 

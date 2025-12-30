@@ -51,9 +51,11 @@ Application submitted on: ${new Date().toLocaleString()}
     formSubmissionData.append('message', emailBody);
     formSubmissionData.append('_subject', `🎓 New Admission Application - ${formData.firstName} ${formData.lastName}`);
     formSubmissionData.append('_replyto', formData.email);
+    formSubmissionData.append('_next', window.location.href);
+    formSubmissionData.append('_captcha', 'false');
 
     try {
-      const response = await fetch('https://formspree.io/f/mgvykldp', {
+      const response = await fetch('https://formsubmit.co/aravind@dunmarkedu.com,admin@dunmarkedu.com,contact@dunmarkedu.com,info@dunmarkedu.com,principal@dunmarkedu.com', {
         method: 'POST',
         body: formSubmissionData,
         headers: {

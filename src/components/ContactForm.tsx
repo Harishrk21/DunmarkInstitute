@@ -52,23 +52,47 @@ const ContactForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
       setLoading(true);
       
-      // Simulate form submission with a timeout
-      setTimeout(() => {
-        setLoading(false);
-        setSubmitted(true);
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          message: '',
+      const formSubmissionData = new FormData();
+      formSubmissionData.append('name', formData.name);
+      formSubmissionData.append('email', formData.email);
+      formSubmissionData.append('message', formData.message);
+      formSubmissionData.append('_replyto', formData.email);
+      formSubmissionData.append('_subject', 'Contact Form Submission');
+      formSubmissionData.append('_next', window.location.href);
+      formSubmissionData.append('_captcha', 'false');
+      
+      try {
+        const response = await fetch('https://formsubmit.co/aravind@dunmarkedu.com,admin@dunmarkedu.com,contact@dunmarkedu.com,info@dunmarkedu.com,principal@dunmarkedu.com', {
+          method: 'POST',
+          body: formSubmissionData,
+          headers: {
+            'Accept': 'application/json'
+          }
         });
-      }, 1000);
+
+        if (response.ok) {
+          setSubmitted(true);
+          // Reset form
+          setFormData({
+            name: '',
+            email: '',
+            message: '',
+          });
+        } else {
+          setLoading(false);
+          alert('Error sending message. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        setLoading(false);
+        alert('Error sending message. Please try again.');
+      }
     }
   };
 

@@ -61,9 +61,9 @@ const Faculty: React.FC = () => {
                 
                 {/* Contact Info */}
                 <div className="space-y-3 mb-6">
-                  <a href="mailto:sarah.j@dunmark.edu" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
+                  <a href="mailto:contact@dunmarkedu.com" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
                     <Mail size={18} className="mr-3 text-cyan-400" />
-                    sarah.j@dunmark.edu
+                    contact@dunmarkedu.com
                   </a>
                   <a href="tel:+1234567890" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
                     <Phone size={18} className="mr-3 text-cyan-400" />
@@ -105,9 +105,9 @@ const Faculty: React.FC = () => {
                 <p className="text-slate-300 text-sm mb-6">Ph.D. in Clinical Psychology, 12+ years experience</p>
                 
                 <div className="space-y-3 mb-6">
-                  <a href="mailto:michael.c@dunmark.edu" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
+                  <a href="mailto:contact@dunmarkedu.com" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
                     <Mail size={18} className="mr-3 text-cyan-400" />
-                    michael.c@dunmark.edu
+                    contact@dunmarkedu.com
                   </a>
                   <a href="tel:+1234567891" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
                     <Phone size={18} className="mr-3 text-cyan-400" />
@@ -148,9 +148,9 @@ const Faculty: React.FC = () => {
                 <p className="text-slate-300 text-sm mb-6">Ph.D. in Speech Pathology, 10+ years experience</p>
                 
                 <div className="space-y-3 mb-6">
-                  <a href="mailto:emily.r@dunmark.edu" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
+                  <a href="mailto:contact@dunmarkedu.com" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
                     <Mail size={18} className="mr-3 text-cyan-400" />
-                    emily.r@dunmark.edu
+                    contact@dunmarkedu.com
                   </a>
                   <a href="tel:+1234567892" className="flex items-center text-slate-300 hover:text-cyan-300 transition-colors">
                     <Phone size={18} className="mr-3 text-cyan-400" />

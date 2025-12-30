@@ -18,11 +18,24 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    const formSubmissionData = new FormData();
+    formSubmissionData.append('name', formData.name);
+    formSubmissionData.append('email', formData.email);
+    formSubmissionData.append('phone', formData.phone);
+    formSubmissionData.append('subject', formData.subject);
+    formSubmissionData.append('message', formData.message);
+    formSubmissionData.append('_replyto', formData.email);
+    formSubmissionData.append('_subject', formData.subject || 'Contact Form Submission');
+    formSubmissionData.append('_next', window.location.href);
+    formSubmissionData.append('_captcha', 'false');
+    
     try {
-      const response = await fetch('https://formspree.io/f/mgvykldp', {
+      const response = await fetch('https://formsubmit.co/aravind@dunmarkedu.com,admin@dunmarkedu.com,contact@dunmarkedu.com,info@dunmarkedu.com,principal@dunmarkedu.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: formSubmissionData,
+        headers: {
+          'Accept': 'application/json'
+        }
       });
       
       if (response.ok) {
@@ -154,7 +167,7 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6 text-white" />,
       title: 'Email',
-      details: ['info@dunmark.edu', 'contact@dunmark.edu', 'principal@dunmark.edu','aravind@dunmarkedu.com'],
+      details: ['info@dunmarkedu.com', 'contact@dunmarkedu.com', 'principal@dunmarkedu.com', 'aravind@dunmarkedu.com', 'admin@dunmarkedu.com'],
       bgGradient: 'from-cyan-700 via-teal-700 to-blue-700'
     },
     {

@@ -201,14 +201,16 @@ const Footer: React.FC = () => {
                     Villivakkam, Chennai, Tamil Nadu 600049
                   </span>
                 </li>
-                <li className="flex items-center group/contact">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0 group-hover/contact:scale-110 transition duration-300">
+                <li className="flex items-start group/contact">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0 group-hover/contact:scale-110 transition duration-300 mt-0.5">
                     <Phone size={14} className="text-white" />
                   </div>
-                  <a href="tel:+18001234567" className="hover:text-white transition text-cyan-100 text-sm">
-                    +91 82489 99216 <br/>
-                    +91 80731 78006
-                  </a>
+                  <div className="flex flex-col text-cyan-100 text-sm">
+                    <a href="tel:+916379262127" className="hover:text-white transition">+91 63792 62127</a>
+                    <a href="tel:+917200766120" className="hover:text-white transition">+91 72007 66120</a>
+                    <a href="tel:+917200766143" className="hover:text-white transition">+91 72007 66143</a>
+                    <a href="tel:+917200766720" className="hover:text-white transition">+91 72007 66720</a>
+                  </div>
                 </li>
                 <li className="flex items-center group/contact">
                   <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0 group-hover/contact:scale-110 transition duration-300">

@@ -161,13 +161,24 @@ const Contact = () => {
     {
       icon: <Phone className="w-6 h-6 text-white" />,
       title: 'Phone',
-      details: ['Admissions: +91 82489 99216', 'Academic Office: +91 80731 78006'],
+      details: [
+        { label: 'Line 1', value: '+91 63792 62127', href: 'tel:+916379262127' },
+        { label: 'Line 2', value: '+91 72007 66120', href: 'tel:+917200766120' },
+        { label: 'Line 3', value: '+91 72007 66143', href: 'tel:+917200766143' },
+        { label: 'Line 4', value: '+91 72007 66720', href: 'tel:+917200766720' }
+      ],
       bgGradient: 'from-emerald-700 via-teal-700 to-cyan-700'
     },
     {
       icon: <Mail className="w-6 h-6 text-white" />,
       title: 'Email',
-      details: ['info@dunmarkedu.com', 'contact@dunmarkedu.com', 'principal@dunmarkedu.com', 'aravind@dunmarkedu.com', 'admin@dunmarkedu.com'],
+      details: [
+        { value: 'info@dunmarkedu.com', href: 'mailto:info@dunmarkedu.com' },
+        { value: 'contact@dunmarkedu.com', href: 'mailto:contact@dunmarkedu.com' },
+        { value: 'principal@dunmarkedu.com', href: 'mailto:principal@dunmarkedu.com' },
+        { value: 'aravind@dunmarkedu.com', href: 'mailto:aravind@dunmarkedu.com' },
+        { value: 'admin@dunmarkedu.com', href: 'mailto:admin@dunmarkedu.com' }
+      ],
       bgGradient: 'from-cyan-700 via-teal-700 to-blue-700'
     },
     {
@@ -233,10 +244,24 @@ const Contact = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-center relative z-10">{item.title}</h3>
-                <ul className="space-y-2 relative z-10">
-                  {item.details.map((detail, i) => (
-                    <li key={i} className="text-cyan-100 text-center text-sm">{detail}</li>
-                  ))}
+                <ul className="space-y-2 relative z-10 w-full">
+                  {item.details.map((detail, i) => {
+                    if (typeof detail === 'string') {
+                      return <li key={i} className="text-cyan-100 text-center text-sm">{detail}</li>;
+                    }
+                    return (
+                      <li key={i} className="text-cyan-100 text-center text-sm">
+                        {detail.label && <span className="font-semibold text-white/90">{detail.label}: </span>}
+                        {detail.href ? (
+                          <a href={detail.href} className="hover:text-white transition duration-300 underline decoration-cyan-300/40 hover:decoration-white">
+                            {detail.value}
+                          </a>
+                        ) : (
+                          detail.value
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}

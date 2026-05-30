@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/dunlogo-removebg-preview.png';
+import logo from '../assets/logo1.png';
 
 const Logo: React.FC = () => {
   return (

@@ -289,23 +289,33 @@ const Admission = () => {
             </p>
           </div>
           
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {steps.map((step, index) => (
-                <div key={step.id} className="group relative">
-                  <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-8 rounded-2xl shadow-2xl border border-teal-400/20 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/20 hover:shadow-2xl">
-                    <div className="bg-gradient-to-br from-cyan-500/20 to-teal-500/20 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto border border-cyan-400/30">
-                      {step.icon}
+          <div className="max-w-6xl mx-auto flex justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch w-full">
+              {steps.map((step) => (
+                <div key={step.id} className="group relative flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-8 rounded-2xl shadow-2xl border border-teal-400/20 text-center transform transition-all duration-300 hover:scale-[1.03] hover:shadow-cyan-500/20 hover:shadow-2xl flex flex-col justify-between items-center h-full">
+                    <div className="flex flex-col items-center w-full">
+                      {/* Icon */}
+                      <div className="bg-gradient-to-br from-cyan-500/20 to-teal-500/20 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto border border-cyan-400/30 group-hover:border-cyan-400/65 transition-all duration-300">
+                        {step.icon}
+                      </div>
+                      
+                      {/* Step Number Badge */}
+                      <div className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
+                        {step.id}
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-cyan-100 mb-3 group-hover:text-cyan-300 transition-colors duration-300">
+                        {step.title}
+                      </h3>
                     </div>
-                    <div className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
-                      {step.id}
-                    </div>
-                    <h3 className="text-xl font-bold text-cyan-100 mb-3">{step.title}</h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">{step.description}</p>
+                    
+                    {/* Description */}
+                    <p className="text-slate-300 text-sm leading-relaxed mt-2 flex-grow">
+                      {step.description}
+                    </p>
                   </div>
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 transform -translate-y-1/2"></div>
-                  )}
                 </div>
               ))}
             </div>

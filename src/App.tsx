@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdmissionModal from './components/AdmissionModal';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -26,9 +27,32 @@ import CourseNeurodevelopmental from './pages/courses/CourseNeurodevelopmental';
 import CourseAssistiveTech from './pages/courses/CourseAssistiveTech';
 
 function App() {
+  const [admissionOpen, setAdmissionOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest('a');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (href === '/admission' || href?.startsWith('/admission')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setAdmissionOpen(true);
+      }
+    };
+    const handleCustomEvent = () => setAdmissionOpen(true);
+    document.addEventListener('click', handleClick, true);
+    window.addEventListener('open-admission-modal', handleCustomEvent);
+    return () => {
+      document.removeEventListener('click', handleClick, true);
+      window.removeEventListener('open-admission-modal', handleCustomEvent);
+    };
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
+      <AdmissionModal open={admissionOpen} onClose={() => setAdmissionOpen(false)} />
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow">

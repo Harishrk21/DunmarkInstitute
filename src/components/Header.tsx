@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Award } from 'lucide-react';
-import Logo from './Logo';
+import Logo from '../assets/newlogo.png';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,14 +59,14 @@ const Header: React.FC = () => {
           <div className="lg:col-span-3 flex justify-start z-50">
             <Link to="/" className="flex items-center group">
               <div className="transform group-hover:scale-105 transition-all duration-300 flex items-center justify-start bg-white/5 p-1.5 rounded-xl border border-white/10 backdrop-blur-sm shadow-md">
-                <Logo />
+                <img src={Logo} alt="Dunmark Institute Logo" className="h-10 w-auto" />
               </div>
               <div className="ml-3">
                 <h1 className="text-sm xl:text-base font-extrabold leading-tight text-white tracking-wide group-hover:text-cyan-300 transition-colors duration-300">
-                  DUNMARK
+                  DUNMARK INSTITUTE
                 </h1>
                 <p className="text-[9px] xl:text-[10px] font-medium text-cyan-400/90 tracking-widest uppercase">
-                  Medical Science
+                  of Medical Sciences
                 </p>
               </div>
             </Link>
@@ -118,7 +118,7 @@ const Header: React.FC = () => {
                     className="ml-1 transition-transform duration-300 group-hover:rotate-180 text-slate-400" 
                   />
                 </button>
-                <div className="absolute left-0 mt-1 w-64 bg-slate-950/95 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/60 py-2 z-50 border border-white/10 hidden group-hover:block transition-all duration-300">
+                <div className="absolute left-0 top-full w-64 bg-slate-950/95 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/60 py-2 z-50 border border-white/10 hidden group-hover:block transition-all duration-300 before:absolute before:inset-x-0 before:-top-2 before:h-2 before:content-['']">
                   <div className="space-y-0.5 px-1.5">
                     <Link 
                       to="/courses" 
@@ -188,7 +188,7 @@ const Header: React.FC = () => {
                     className="ml-1 transition-transform duration-300 group-hover:rotate-180 text-slate-400" 
                   />
                 </button>
-                <div className="absolute left-0 mt-1 w-56 bg-slate-950/95 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/60 py-2 z-50 border border-white/10 hidden group-hover:block transition-all duration-300">
+                <div className="absolute left-0 top-full w-56 bg-slate-950/95 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/60 py-2 z-50 border border-white/10 hidden group-hover:block transition-all duration-300 before:absolute before:inset-x-0 before:-top-2 before:h-2 before:content-['']">
                   <div className="space-y-0.5 px-1.5">
                     <Link 
                       to="/departments" 
@@ -227,7 +227,7 @@ const Header: React.FC = () => {
                     className="ml-1 transition-transform duration-300 group-hover:rotate-180 text-slate-400" 
                   />
                 </button>
-                <div className="absolute left-0 mt-1 w-56 bg-slate-950/95 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/60 py-2 z-50 border border-white/10 hidden group-hover:block transition-all duration-300">
+                <div className="absolute left-0 top-full w-56 bg-slate-950/95 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/60 py-2 z-50 border border-white/10 hidden group-hover:block transition-all duration-300 before:absolute before:inset-x-0 before:-top-2 before:h-2 before:content-['']">
                   <div className="space-y-0.5 px-1.5">
                     <Link 
                       to="/campus" 
@@ -276,13 +276,13 @@ const Header: React.FC = () => {
           {/* Action Column - Right column */}
           <div className="lg:col-span-3 flex justify-end items-center z-50 space-x-4">
             {/* Desktop CTA Button */}
-            <Link 
-              to="/admission" 
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-admission-modal'))}
               className="hidden lg:inline-flex items-center justify-center bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold text-xs xl:text-sm px-5 py-2.5 rounded-full shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 hover:scale-[1.03] transition-all duration-300"
             >
               <Award size={14} className="mr-1.5" />
               Apply Now
-            </Link>
+            </button>
 
             {/* Mobile Menu Toggle Button */}
             <button 
@@ -497,14 +497,13 @@ const Header: React.FC = () => {
 
             {/* Mobile CTA */}
             <li className="pt-4">
-              <Link 
-                to="/admission" 
-                className="flex items-center justify-center bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all duration-200 text-center"
-                onClick={closeMenu}
+              <button
+                onClick={() => { closeMenu(); window.dispatchEvent(new CustomEvent('open-admission-modal')); }}
+                className="w-full flex items-center justify-center bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all duration-200 text-center"
               >
                 <Award size={16} className="mr-1.5" />
                 Apply Now
-              </Link>
+              </button>
             </li>
           </ul>
         </div>

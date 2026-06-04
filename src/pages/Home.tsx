@@ -8,6 +8,11 @@ const Link = ({ to, children, className, ...props }) => (
   </a>
 );
 
+const openAdmission = (e: React.MouseEvent) => {
+  e.preventDefault();
+  window.dispatchEvent(new CustomEvent('open-admission-modal'));
+};
+
 const Home: React.FC = () => {
   const features = [
     { icon: Award, text: "7 Specialized Programs", color: "text-teal-600" },
@@ -82,51 +87,89 @@ const Home: React.FC = () => {
   return (
     <>
       {/* Hero Banner */}
-      <section className="pt-24 min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-900 via-emerald-800 to-blue-900"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-cyan-600/20 via-teal-500/10 to-emerald-400/20"></div>
-        
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-teal-400 to-emerald-400"></div>
-          <div className="absolute top-1/3 right-20 w-24 h-24 rounded-full bg-gradient-to-r from-cyan-400 to-blue-400"></div>
-          <div className="absolute bottom-20 left-1/4 w-40 h-40 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-28 h-28 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400"></div>
-        </div>
+      <section className="relative min-h-screen overflow-hidden bg-slate-950 flex items-center">
 
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-teal-200 to-emerald-200 mb-8 leading-relaxed">
-            Empowering Healthcare Excellence
-          </h1>
-          
-          <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-emerald-400 mx-auto mb-6 rounded-full"></div>
-          
-          <p className="text-lg md:text-xl text-teal-100 mb-8 max-w-4xl mx-auto leading-relaxed">
-            DUNMARK Institute of Medical Sciences — Where Innovation Meets Excellence in Therapy, Rehabilitation, and Neurodevelopmental Sciences
-          </p>
-          
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4">
-            <Link 
-              to="/admission" 
-              className="bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg transform hover:scale-105 flex items-center"
-            >
-              <Star className="mr-2" size={20} />
-              Apply Now
-            </Link>
-            <Link 
-              to="/courses" 
-              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-cyan-300 font-bold py-3 px-6 rounded-full transition-all duration-300 flex items-center"
-            >
-              <BookOpen className="mr-2" size={20} />
-              Explore Programs
-            </Link>
-            <Link 
-              to="/campus" 
-              className="bg-transparent hover:bg-teal-500/20 text-cyan-200 border-2 border-teal-300 font-bold py-3 px-6 rounded-full transition-all duration-300 backdrop-blur-sm flex items-center"
-            >
-              <MapPin size={20} className="mr-2" />
-              Visit Campus
-            </Link>
+        {/* Full-width background image — no blur */}
+        <img
+          src="/hero_section.png"
+          alt="Dunmark Institute of Medical Sciences"
+          className="absolute inset-0 w-full h-full object-cover object-center scale-110"
+        />
+
+        {/* Overlay — just dark enough for text readability, image stays visible */}
+        <div className="absolute inset-0 bg-slate-950/45"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/20 to-slate-950/65"></div>
+
+        {/* Content — vertically centred */}
+        <div className="relative z-10 w-full py-32 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+
+            {/* Live badge */}
+            <div className="inline-flex items-center gap-2 bg-teal-500/15 border border-teal-500/40 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm">
+              <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse shrink-0"></span>
+              <span className="text-teal-300 text-xs sm:text-sm font-semibold tracking-wide">
+                Admissions Open — Academic Year 2026
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight mb-5">
+              Shaping the{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400">
+                Future of Healthcare
+              </span>
+            </h1>
+
+            {/* Subtext */}
+            <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto px-2">
+              Dunmark Institute of Medical Sciences offers world-class diploma programmes in therapy, rehabilitation, and neurodevelopmental sciences — built for tomorrow's healthcare leaders.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 mb-12">
+              <button
+                onClick={openAdmission}
+                className="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300"
+              >
+                <Star className="mr-2 shrink-0" size={18} />
+                Apply Now
+              </button>
+              <Link
+                to="/courses"
+                className="w-full sm:w-auto inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/25 hover:border-cyan-400/60 font-bold py-3 px-8 rounded-full backdrop-blur-sm transition-all duration-300"
+              >
+                <BookOpen className="mr-2 shrink-0" size={18} />
+                Explore Programs
+              </Link>
+              <Link
+                to="/campus"
+                className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent hover:bg-teal-500/15 text-cyan-200 border border-teal-400/40 hover:border-teal-400 font-bold py-3 px-8 rounded-full backdrop-blur-sm transition-all duration-300"
+              >
+                <MapPin className="mr-2 shrink-0" size={18} />
+                Visit Campus
+              </Link>
+            </div>
+
+            {/* Stat strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-white/10 max-w-2xl mx-auto">
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-extrabold text-cyan-400">7+</p>
+                <p className="text-slate-400 text-xs mt-1">Diploma Programmes</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-extrabold text-teal-400">100%</p>
+                <p className="text-slate-400 text-xs mt-1">Placement Support</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-extrabold text-emerald-400">Govt.</p>
+                <p className="text-slate-400 text-xs mt-1">Central Govt. Affiliated</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-extrabold text-cyan-300">2026</p>
+                <p className="text-slate-400 text-xs mt-1">Batch Now Open</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -134,10 +177,11 @@ const Home: React.FC = () => {
       {/* Marquee */}
       <div className="bg-gradient-to-r from-teal-800 via-emerald-700 to-cyan-800 text-white py-3 overflow-hidden border-y-2 border-cyan-400/30">
         <div className="animate-marquee whitespace-nowrap">
-          <span className="mx-8">✦ Inaugural 2025 Academic Year - Admissions Open</span>
-          <span className="mx-8">✦ 5 Specialized Diploma Programs</span>
-          <span className="mx-8">✦ Exclusive Scholarships for Pioneer Students</span>
+          <span className="mx-8">✦ Admissions Open — Academic Year 2026</span>
+          <span className="mx-8">✦ 7 Specialized Diploma Programs</span>
+          <span className="mx-8">✦ Scholarships Available for 2026 Enrollments</span>
           <span className="mx-8">✦ State-of-the-Art Modern Campus</span>
+          <span className="mx-8">✦ Limited Seats — Apply Now</span>
         </div>
       </div>
 
@@ -179,7 +223,7 @@ const Home: React.FC = () => {
               <div className="w-24 h-2 bg-gradient-to-r from-cyan-500 to-emerald-500 mb-6 rounded-full"></div>
               
               <p className="text-gray-700 mb-4 leading-relaxed">
-                Dunmark Institute of Medical Science is an innovative educational initiative founded in 2025 by passionate students and experienced faculty members. 
+                Dunmark Institute of Medical Sciences is an innovative educational initiative founded by passionate students and experienced faculty members.
                 Our vision is to create a new standard in healthcare education.
               </p>
               
@@ -301,23 +345,23 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-200 to-emerald-200 bg-clip-text text-transparent">
-              Join Our Inaugural Class of 2025
+              Join Our 2026 Academic Batch — Admissions Open
             </h2>
             
             <div className="w-32 h-2 bg-gradient-to-r from-cyan-400 to-emerald-400 mx-auto mb-8 rounded-full"></div>
             
             <p className="text-lg md:text-xl text-teal-100 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Be part of our founding community and help create the future of healthcare education.
+              Seats are filling fast for 2026. Secure your place in our upcoming batch and take the first step towards a career in healthcare.
             </p>
             
             <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4">
-              <Link 
-                to="/admission" 
+              <button
+                onClick={openAdmission}
                 className="bg-white hover:bg-gray-100 text-teal-700 font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg transform hover:scale-105 flex items-center"
               >
                 <Star className="mr-2" size={20} />
                 Apply Now
-              </Link>
+              </button>
               <Link 
                 to="/campus" 
                 className="bg-transparent hover:bg-teal-600/30 text-white border-2 border-cyan-300 font-bold py-3 px-8 rounded-full transition-all duration-300 backdrop-blur-sm flex items-center"
@@ -351,6 +395,7 @@ const Home: React.FC = () => {
           animation-play-state: paused;
         }
       `}</style>
+
     </>
   );
 };
